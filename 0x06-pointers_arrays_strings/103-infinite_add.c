@@ -41,7 +41,7 @@ i--;
 j--;
 if (j >= size_r || i >= size_r)
 return (0);
-while (j >= 0  i >= 0  overflow == 1)
+while (j >= 0 || i >= 0 || overflow == 1)
 {
 if (i < 0)
 val1 = 0;
