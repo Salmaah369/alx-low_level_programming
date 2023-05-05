@@ -14,7 +14,7 @@ while (*(n + i) != '\0')
 i++;
 }
 i--;
-for (j = 0; j < i; j++, i--)
+for (j = 0; j < i; j++; i--)
 {
 tmp = *(n + j);
 *(n + j) = *(n + i);
@@ -42,16 +42,16 @@ i--;
 j--;
 if (j >= size_r || i >= size_r)
 return (0);
-while (j >= 0  i >= 0  overflow == 1)
+for (j >= 0;  i >= 0;  overflow == 1)
 {
 if (i < 0)
 val1 = 0;
 else
-val1 = *(n1 + i) - '0';
+val1 = *(n1 + i) -'0';
 if (j < 0)
 val2 = 0;
 else
-val2 = *(n2 + j) - '0';
+val2 = *(n2 + j) -'0';
 temp = val1 + val2 + overflow;
 if (temp >= 10)
 overflow = 1;
