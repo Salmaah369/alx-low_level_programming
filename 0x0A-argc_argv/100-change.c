@@ -33,8 +33,9 @@ int coinConverter(int i)
 			i -= 1;
 
 		count++;
-}
-return (count);
+	}
+
+	return (count);
 }
 /**
 * main - Takes in exactly one argument for minimum coin count
