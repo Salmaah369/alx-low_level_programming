@@ -1,63 +1,40 @@
 #include "main.h"
+#include <stdlib.h>
 /**
-* _isspace - check if a character is whitespace
-* @c: the character to check
-* Return: 1 is c is a whitespace character, otherwise 0
+* argstostr - main entry
+* @ac: int input
+* @av: double pointer array
+* Return: 0
 */
-int _isspace(int c)
+char *argstostr(int ac, char **av)
 {
-	if (c == 0x20 || (c >= 0x09 && c <= 0x0d))
-		return (1);
-	return (0);
-}
+        int i, n, r = 0, l = 0;
+        char *str;
 
+        if (ac == 0 || av == NULL)
+                return (NULL);
 
-/**
-* strtow - split a string into words
-* @str: a pointer to the string to split
-* Return: NULL if memory allocation fails or if str is NULL or empty (""),
-* otherwise return a pointer to the array of words terminated by a NULL
-*/
-char **strtow(char *str)
-{
-	char **words, *pos = str;
-	int w = 0, c;
+        for (i = 0; i < ac; i++)
+        {
+                for (n = 0; av[i][n]; n++)
+                        l++;
+        }
+        l += ac;
 
-	if (!(str && *str))
-		return (NULL);
-	do {
-		while (_isspace(*pos))
-			++pos;
-		if (!*pos)
-			break;
-		while (*(++pos) && !_isspace(*pos))
-			;
-	} while (++w, *pos);
-	if (!w)
-		return (NULL);
-	words = (char **) malloc(sizeof(char *) * (w + 1));
-	if (!words)
-		return (NULL);
-	w = 0, pos = str;
-	do {
-		while (_isspace(*pos))
-			++pos;
-		if (!*pos)
-			break;
-		for (str = pos++; *pos && !_isspace(*pos); ++pos)
-			;
-		words[w] = (char *) malloc(sizeof(char) * (pos - str + 1));
-		if (!words[w])
-		{
-			while (w >  0)
-				free(words[--w]);
-			free(words);
-			return (NULL);
-		}
-		for (c = 0; str < pos; ++c, ++str)
-			words[w][c] = *str;
-		words[w][c] = '\0';
-	} while (++w, *pos);
-	words[w] = NULL;
-	return (words);
+        str = malloc(sizeof(char) * l + 1);
+        if (str == NULL)
+                return (NULL);
+        for (i = 0; i < ac; i++)
+        {
+        for (n = 0; av[i][n]; n++)
+        {
+                str[r] = av[i][n];
+                r++;
+        }
+        if (str[r] == '\0')
+        {
+                str[r++] = '\n';
+        }
+        }
+        return (str);
 }
